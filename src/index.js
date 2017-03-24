@@ -33,16 +33,24 @@ app.post('/data', function (req, res) {
         return res.sendStatus(404);
     }
     let codeData = req.body.data;
-    codegen(b64DecodeUnicode(codeData), function (data) {
+    let error = false;
+    codegen(b64DecodeUnicode(codeData), (data) => {
+        if (error) return;
         let resp = {
             status: "success",
             data: b64EncodeUnicode(data),
         };
         res.send(JSON.stringify(resp));
-    }, function (data) {
-        console.error(data.toString());
-        res.status(404);
-        res.send("error");
+        res.end();
+    }, (data) => {
+        if (error) return;
+        error = true;
+        let resp = {
+            status: "error",
+            data: b64EncodeUnicode(data),
+        }
+        res.send(JSON.stringify(resp));
+        res.end();
     })
 });
 

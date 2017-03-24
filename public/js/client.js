@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     textareaInput.value = src.join('\n');
 
     var outputArea = document.getElementById('output-area');
+    var errorPad = document.getElementById('error-pad');
 
     var inputEditor = CodeMirror.fromTextArea(textareaInput, {
         lineNumbers: true,
@@ -53,7 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                 if (xmlhttp.status === 200) {
                     var _data = JSON.parse(xmlhttp.responseText);
-                    outputEditor.getDoc().setValue(b64DecodeUnicode(_data.data)); 
+                    if (_data.status == "success") {
+                        outputEditor.getDoc().setValue(b64DecodeUnicode(_data.data)); 
+                    } else {
+                        errorPad.innerText = b64DecodeUnicode(_data.data);
+                    }
                 } else {
                     console.error(xmlhttp.status.toString() + ":" + xmlhttp.responseText);
                 }
