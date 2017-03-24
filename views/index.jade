@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        title ASM Generator
+        link(href='/static/css/default.css', rel='stylesheet')
+        link(href='/static/codemirror/codemirror.css', rel='stylesheet')
+        link(href='https://unpkg.com/purecss@0.6.2/build/pure-min.css' 
+            rel='stylesheet'
+            integrity='sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD'
+            crossorigin='anonymous')
+    body
+        h1 ASM Generator
+
+        .pure-g#content
+
+            .pure-u-1-2#input-container
+                h2 Input area
+                textarea#code-input
+                br
+                button.pure-button#convert-button Convert
+
+            .pure-u-1-2#output-container
+                h2 Output area
+                textarea#output-area
+
+        br
+        br
+        div
+            small Copyright 2017. 计算机科学4班 DZ Chan
+            br
+            small <a href="https://github.com/ChannelOne/asm-gen-web">Fork me on Github</a>
+
+        script(src='/static/codemirror/codemirror.js')
+        script(src='/static/mode/clike/clike.js')
+        script(src='/static/js/client.js')

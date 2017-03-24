@@ -1,0 +1,15 @@
+{
+  "name": "asm-gen-web",
+  "version": "1.0.0",
+  "description": "A asm generator of web",
+  "main": "index.js",
+  "author": "ChannelOne <cdzos97@gmail.com>",
+  "license": "LGPL-v3",
+  "dependencies": {
+    "atob": "^2.0.3",
+    "body-parser": "^1.17.1",
+    "btoa": "^1.1.2",
+    "express": "^4.15.2",
+    "jade": "^1.11.0"
+  }
+}
