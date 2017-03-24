@@ -19,7 +19,16 @@ html
                 h2 Input area
                 textarea#code-input
                 br
-                button.pure-button#convert-button Convert
+                .pure-form
+                    label Optimization:
+                    span &nbsp; &nbsp;
+                    select#optimization-select
+                        option(value='0') 0
+                        option(value='1') 1
+                        option(value='2') 2
+                        option(value='3') 3
+                    span &nbsp; &nbsp;
+                    button.pure-button#convert-button Convert
 
             .pure-u-1-2#output-container
                 h2 Output area

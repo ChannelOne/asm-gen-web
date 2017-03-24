@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var outputArea = document.getElementById('output-area');
     var errorPad = document.getElementById('error-pad');
 
+    var optSelect = document.getElementById('optimization-select');
+
     var inputEditor = CodeMirror.fromTextArea(textareaInput, {
         lineNumbers: true,
         matchBrackets: true,
@@ -45,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var uploadData = {
             data: b64EncodeUnicode(inputEditor.getDoc().getValue()),
+            optimization: parseInt(optSelect.value),
         }
 
         var xmlhttp = new XMLHttpRequest();

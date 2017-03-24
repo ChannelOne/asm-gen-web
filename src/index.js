@@ -34,7 +34,13 @@ app.post('/data', function (req, res) {
     }
     let codeData = req.body.data;
     let error = false;
-    codegen(b64DecodeUnicode(codeData), (data) => {
+    let option = {
+        optimization: 0,
+    }
+    if (req.body.optimization) {
+        option.optimization = req.body.optimization
+    }
+    codegen(b64DecodeUnicode(codeData), option, (data) => {
         if (error) return;
         let resp = {
             status: "success",

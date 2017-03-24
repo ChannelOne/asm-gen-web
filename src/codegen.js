@@ -1,8 +1,10 @@
 const child_process = require('child_process');
 
-function codegen(src, outCb, errCb) {
+function codegen(src, options, outCb, errCb) {
+
+    let optLevel = parseInt(options.optimization);
     let gcc = child_process.spawn('gcc', [
-        '-O0', '-S', '-masm=intel', '-x' , 'c', '-' , '-o-'
+        '-O'+optLevel, '-S', '-masm=intel', '-x' , 'c', '-' , '-o-'
     ]);
 
     let errorBuffer = [];
