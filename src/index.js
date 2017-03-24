@@ -43,7 +43,7 @@ app.post('/data', function (req, res) {
         res.send(JSON.stringify(resp));
         res.end();
     }, (data) => {
-        if (error) return;
+        if (data.length === 0) return; 
         error = true;
         let resp = {
             status: "error",

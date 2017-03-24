@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var _data = JSON.parse(xmlhttp.responseText);
                     if (_data.status == "success") {
                         outputEditor.getDoc().setValue(b64DecodeUnicode(_data.data)); 
+                        errorPad.innerText = "";
                     } else {
                         errorPad.innerText = b64DecodeUnicode(_data.data);
                     }

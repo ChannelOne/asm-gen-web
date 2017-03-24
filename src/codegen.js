@@ -5,12 +5,28 @@ function codegen(src, outCb, errCb) {
         '-O0', '-S', '-masm=intel', '-x' , 'c', '-' , '-o-'
     ]);
 
+    let errorBuffer = [];
+    let outBuffer = [];
+
     gcc.on('uncaughtException', function (evt) {
         console.error(evt);
     });
 
-    gcc.stdout.on('data', outCb);
-    gcc.stderr.on('data', errCb);
+    gcc.stdout.on('data', (data) => {
+        outBuffer.push(data.toString());
+    });
+
+    gcc.stdout.on('end', (data) => {
+        outCb(outBuffer.join());
+    })
+
+    gcc.stderr.on('data', (data) => {
+        errorBuffer.push(data.toString());
+    })
+
+    gcc.stderr.on('end', () => {
+        errCb(errorBuffer.join());
+    })
 
     gcc.stdin.write(src);
     gcc.stdin.end();
