@@ -33,7 +33,6 @@ app.post('/data', function (req, res) {
         return res.sendStatus(404);
     }
     let codeData = req.body.data;
-    let error = false;
     let option = {
         optimization: 0,
         masm: 'intel',
@@ -45,7 +44,6 @@ app.post('/data', function (req, res) {
         option.masm = req.body.masm;
     }
     codegen(b64DecodeUnicode(codeData), option, (data) => {
-        if (error) return;
         let resp = {
             status: "success",
             data: b64EncodeUnicode(data),
@@ -53,8 +51,6 @@ app.post('/data', function (req, res) {
         res.send(JSON.stringify(resp));
         res.end();
     }, (data) => {
-        if (data.length === 0) return; 
-        error = true;
         let resp = {
             status: "error",
             data: b64EncodeUnicode(data),

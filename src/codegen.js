@@ -15,6 +15,7 @@ function codegen(src, options, outCb, errCb) {
 
     let errorBuffer = [];
     let outBuffer = [];
+    let sent = false;
 
     gcc.on('uncaughtException', function (evt) {
         console.error(evt);
@@ -25,6 +26,8 @@ function codegen(src, options, outCb, errCb) {
     });
 
     gcc.stdout.on('end', (data) => {
+        if (sent) return;
+        sent = true;
         outCb(outBuffer.join());
     })
 
@@ -33,7 +36,11 @@ function codegen(src, options, outCb, errCb) {
     })
 
     gcc.stderr.on('end', () => {
-        errCb(errorBuffer.join());
+        if (sent) return;
+        let result = errorBuffer.join();
+        if (result.length === 0) return;
+        sent = true;
+        errCb(result);
     })
 
     gcc.stdin.write(src);
