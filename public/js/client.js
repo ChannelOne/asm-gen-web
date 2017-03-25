@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var errorPad = document.getElementById('error-pad');
 
     var optSelect = document.getElementById('optimization-select');
+    var masmSelect = document.getElementById('masm-select');
 
     var inputEditor = CodeMirror.fromTextArea(textareaInput, {
         lineNumbers: true,
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var uploadData = {
             data: b64EncodeUnicode(inputEditor.getDoc().getValue()),
             optimization: parseInt(optSelect.value),
+            masm: masmSelect.value,
         }
 
         var xmlhttp = new XMLHttpRequest();

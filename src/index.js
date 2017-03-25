@@ -36,9 +36,13 @@ app.post('/data', function (req, res) {
     let error = false;
     let option = {
         optimization: 0,
+        masm: 'intel',
     }
     if (req.body.optimization) {
         option.optimization = req.body.optimization
+    }
+    if (req.body.masm) {
+        option.masm = req.body.masm;
     }
     codegen(b64DecodeUnicode(codeData), option, (data) => {
         if (error) return;
